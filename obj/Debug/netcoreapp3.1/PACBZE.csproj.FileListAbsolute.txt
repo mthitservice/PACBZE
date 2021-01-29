@@ -1,0 +1,13 @@
+C:\Projekt\PACBZE\bin\Debug\netcoreapp3.1\PACBZE.exe
+C:\Projekt\PACBZE\bin\Debug\netcoreapp3.1\PACBZE.deps.json
+C:\Projekt\PACBZE\bin\Debug\netcoreapp3.1\PACBZE.runtimeconfig.json
+C:\Projekt\PACBZE\bin\Debug\netcoreapp3.1\PACBZE.runtimeconfig.dev.json
+C:\Projekt\PACBZE\bin\Debug\netcoreapp3.1\PACBZE.dll
+C:\Projekt\PACBZE\bin\Debug\netcoreapp3.1\PACBZE.pdb
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.csprojAssemblyReference.cache
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.AssemblyInfoInputs.cache
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.AssemblyInfo.cs
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.csproj.CoreCompileInputs.cache
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.dll
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.pdb
+C:\Projekt\PACBZE\obj\Debug\netcoreapp3.1\PACBZE.genruntimeconfig.cache
