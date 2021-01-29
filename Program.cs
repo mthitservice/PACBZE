@@ -1,4 +1,5 @@
 ﻿using System;
+using PACBZE.classes;
 
 namespace PACBZE
 {
@@ -6,8 +7,8 @@ namespace PACBZE
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            PacBzeApp Game =new PacBzeApp();
+            Game.start();
         }
     }
 }
