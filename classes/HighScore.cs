@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace PACBZE.classes
 {
-   public class HighScore:List<Gamer>
-    {              
+    [Serializable]
+    public class HighScore : List<Gamer>
+    {
 
 
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
+using System.Runtime.Serialization.Formatters.Binary;
 using PACBZE.ui;
 
 namespace PACBZE.classes
@@ -23,6 +25,7 @@ namespace PACBZE.classes
 
             // Spielernamen erfragen
             this.get_Gamer();
+
             // Spielfeld darstellen
             this.draw_Field();
             // Spiel starten
@@ -159,20 +162,16 @@ namespace PACBZE.classes
         {
 
             FileStream fs = new FileStream(@"c:\temp\highscore.csv", FileMode.OpenOrCreate, FileAccess.Write);
-            string s = "Platz;Name;Punkte\r\n";
-            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-            fs.Write(encoding.GetBytes(s), 0, s.Length);
-            int zl = 1;
-            foreach (Gamer g in _highScore)
-            {
 
-                string t = "";
-                t = string.Format("{0};{1};{2}\r\n", zl, g.GamerName, g.Score);
-                fs.Write(encoding.GetBytes(t), 0, t.Length);
-                zl++;
+
+
+
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var gZipStream = new GZipStream(fs, CompressionMode.Compress))
+            {
+                bf.Serialize(gZipStream, _highScore);
 
             }
-
             fs.Close();
 
 
@@ -180,37 +179,23 @@ namespace PACBZE.classes
         }
         private void load_highscore()
         {
-            string highscore = "";
-            highscore = File.ReadAllText(@"c:\temp\highscore.csv");
-
-
-            string[] Zeilen = highscore.Split("\r\n");
-            int zl = 1;
-            foreach (var t in Zeilen)
+            FileStream fs = new FileStream(@"c:\temp\highscore.csv", FileMode.OpenOrCreate, FileAccess.Read);
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var z = new GZipStream(fs, CompressionMode.Decompress))
             {
+                var x = (HighScore)bf.Deserialize(z);
 
-                if (zl != 1)
+
+
+
+                foreach (Gamer o in x)
                 {
-                    var SPalten = t.Split(";");
-                    Gamer g = new Gamer();
-                    g.GamerName = SPalten[1];
-                    g.Score = Convert.ToInt32(SPalten[2]);
-                    _highScore.Add(g);
+                    _highScore.Add(o);
 
                 }
-                zl++;
-
-
-
-
-
             }
 
-
-
-
-
-
+            fs.Close();
         }
 
 
