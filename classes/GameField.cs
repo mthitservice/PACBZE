@@ -2,19 +2,19 @@ using System;
 using System.Collections.Generic;
 namespace PACBZE.classes
 {
-   public class GameField
-    {              
-            public string FieldName { get; set; }
-            
+    public class GameField
+    {
+        public string FieldName { get; set; }
 
-            private List<object> _gamefieldcontent;
-            public List<object> GameFieldContent
-            {
-                get { return _gamefieldcontent; }
-                set { _gamefieldcontent= value; }
-            }
-           
-       public PacBze getPacBze()
+
+        private List<object> _gamefieldcontent;
+        public List<object> GameFieldContent
+        {
+            get { return _gamefieldcontent; }
+            set { _gamefieldcontent = value; }
+        }
+
+        public PacBze getPacBze()
         {
             // Suche Pacman auf dem Feld
             PacBze x = null;
@@ -26,12 +26,32 @@ namespace PACBZE.classes
                     case "PACBZE.classes.PacBze":
                         x = (PacBze)o;
                         return x;
-                      
+
 
                 }
             }
             return x;
         }
+
+        public int getCoinCount()
+        {
+            int i = 0;
+            foreach (object o in this.GameFieldContent)
+            {
+                switch (o.GetType().ToString())
+                {
+                    case "PACBZE.classes.Coin":
+                        i++;
+                        break;
+
+                }
+
+
+            }
+
+            return i;
+        }
+
 
         public List<object> getFieldInfo(byte x, byte y)
         {   // Wer steht alles auf dem Feld rum
@@ -39,7 +59,7 @@ namespace PACBZE.classes
             foreach (object o in this.GameFieldContent)
             {
                 Figur f = (Figur)o;
-                if (f.x==x && f.y==y)
+                if (f.x == x && f.y == y)
                 {
                     templ.Add(o);
 
