@@ -151,6 +151,17 @@ namespace PACBZE.ui
 
         public void show_highscore(HighScore scoreboard)
         {
+            Console.Clear();
+            Console.WriteLine("Highscore");
+            Console.WriteLine("*************************************");
+            int top = 1;
+            foreach (Gamer g in scoreboard)
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", top, g.GamerName, g.Score);
+
+                top++;
+            }
+            Console.ReadKey();
 
         }
 
@@ -163,7 +174,7 @@ namespace PACBZE.ui
             Console.Beep();
             Console.Beep();
             Console.Beep();
-            Console.ReadKey();
+
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using PACBZE.ui;
 
 namespace PACBZE.classes
@@ -17,6 +18,9 @@ namespace PACBZE.classes
         {
             #region "Deklarationsbereich"
             // Eingabe
+            // Highscore Laden
+            this.load_highscore();
+
             // Spielernamen erfragen
             this.get_Gamer();
             // Spielfeld darstellen
@@ -63,6 +67,7 @@ namespace PACBZE.classes
             }
             // Ende: Ausgabe Heighscore
             this.show_highscore();
+            this.save_highscore();
             // AUsgabe
             #endregion
         }
@@ -150,6 +155,65 @@ namespace PACBZE.classes
 
         }
 
+        private void save_highscore()
+        {
+
+            FileStream fs = new FileStream(@"c:\temp\highscore.csv", FileMode.OpenOrCreate, FileAccess.Write);
+            string s = "Platz;Name;Punkte\r\n";
+            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+            fs.Write(encoding.GetBytes(s), 0, s.Length);
+            int zl = 1;
+            foreach (Gamer g in _highScore)
+            {
+
+                string t = "";
+                t = string.Format("{0};{1};{2}\r\n", zl, g.GamerName, g.Score);
+                fs.Write(encoding.GetBytes(t), 0, t.Length);
+                zl++;
+
+            }
+
+            fs.Close();
+
+
+
+        }
+        private void load_highscore()
+        {
+            string highscore = "";
+            highscore = File.ReadAllText(@"c:\temp\highscore.csv");
+
+
+            string[] Zeilen = highscore.Split("\r\n");
+            int zl = 1;
+            foreach (var t in Zeilen)
+            {
+
+                if (zl != 1)
+                {
+                    var SPalten = t.Split(";");
+                    Gamer g = new Gamer();
+                    g.GamerName = SPalten[1];
+                    g.Score = Convert.ToInt32(SPalten[2]);
+                    _highScore.Add(g);
+
+                }
+                zl++;
+
+
+
+
+
+            }
+
+
+
+
+
+
+        }
+
+
         private void check_rules(ref GameStatus status)
         {
 
@@ -170,6 +234,7 @@ namespace PACBZE.classes
                         if (_gameField.getCoinCount() == 0)
                         {
                             _currenGamer.Score = _currenGamer.Score + pac.SaveCoins.Count;
+                            _highScore.Add(_currenGamer);
                             status = GameStatus.succesful;
 
                         }
