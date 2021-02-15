@@ -42,8 +42,9 @@ namespace PACBZE.ui
 
         }
 
-        public void draw_Field(GameField field)
+        public void draw_Field(GameField field,Gamer g)
         {
+           int maxy=0;
             killTheTrace(field); //Alte SPuren beseitigen :)
             foreach (object o in field.GameFieldContent)
             {
@@ -51,6 +52,8 @@ namespace PACBZE.ui
                   Figur tf=new Figur(); //Klone anlegen
                   tf.x=f.x;
                   tf.y=f.y;
+
+                  if (maxy<f.y){maxy=f.y;}
                 
                   Console.SetCursorPosition(f.x,f.y);
                     
@@ -78,6 +81,10 @@ namespace PACBZE.ui
 
 
             }
+            maxy=maxy+1;
+
+               Console.SetCursorPosition(0,maxy);
+               Console.Write("Gamer:{0} Score:{1}",g.GamerName,g.Score);
 
 
 
@@ -107,7 +114,15 @@ namespace PACBZE.ui
 
         public Gamer get_Gamer()
         {
-            return new Gamer();
+            string Spielername;
+            Gamer Spieler =new Gamer();
+            Console.Clear();
+            Console.Write("Gib Deinen Namen ein:");
+            Spielername = Console.ReadLine();
+            Spieler.GamerName=Spielername;
+             Console.Clear();
+            
+            return Spieler;
         }
 
         public void show_gameover(GameField field)

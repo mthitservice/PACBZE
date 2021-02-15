@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using PACBZE.ui;
 
 namespace PACBZE.classes
@@ -72,14 +73,13 @@ namespace PACBZE.classes
         // Spielmethoden
         #region "Game Methods"
         private void get_Gamer()
-        {
-
+        {_currenGamer=  IOHelper.get_Gamer();
 
         }      
        
           private void draw_Field()
         {
-            IOHelper.draw_Field(this._gameField);
+            IOHelper.draw_Field(this._gameField,_currenGamer);
 
         }
         private Direction get_Control()
@@ -120,6 +120,30 @@ namespace PACBZE.classes
         private void check_rules()
         {
 
+          // Prüfen ob Coin gefressen
+          PacBze pac= _gameField.getPacBze();
+
+        List<object> Figuren =_gameField.getFieldInfo(pac.x,pac.y);
+            foreach (var o in Figuren)
+            {
+                   switch (o.GetType().ToString()) 
+                   {
+
+                       case "PACBZE.classes.Coin":
+
+                            pac.SaveCoins.Add((Coin)o);
+                            _gameField.GameFieldContent.Remove(o);
+                            _currenGamer.Score=_currenGamer.Score+pac.SaveCoins.Count;
+
+                           
+                       break;
+
+
+                   }
+
+
+            }
+
 
             
         }
@@ -139,6 +163,8 @@ namespace PACBZE.classes
         {
                 IOHelper.show_highscore(this._highScore);
         }
+
+     
         #endregion
 
 

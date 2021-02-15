@@ -83,7 +83,7 @@ namespace PACBZE.classes
     public interface IGameInputOutput{
 
        Gamer get_Gamer();
-        void draw_Field(GameField field);
+        void draw_Field(GameField field, Gamer g);
          Direction get_Control();
           void show_succesfuly(GameField field);
          void show_gameover(GameField field);
